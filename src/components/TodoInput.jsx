@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 
 export default function (props) {
-  const {handleNewTodo} = props
-  const [newTodoValue, setNewTodoValue] = useState("")
+  const {handleNewTodo, currentTodo, setCurrentTodo} = props
   return (
     <header>
-      <input placeholder="Enter todo" type="text" onChange={(e) => {
-        setNewTodoValue(e.target.value)
+      <input placeholder="Enter todo" type="text" value={currentTodo} onChange={(e) => {
+        setCurrentTodo(e.target.value)
         }}/>
       <button onClick={() => {
-        handleNewTodo(newTodoValue)
-        setNewTodoValue('')
+        if (currentTodo.trim() !== "") {
+          handleNewTodo(currentTodo)
+          setCurrentTodo('')
+        }
         }}>Add Task</button>
     </header>
   )

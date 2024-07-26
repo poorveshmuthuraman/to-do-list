@@ -11,6 +11,8 @@ function App() {
     'do meditation'
   ]);
 
+  const [currentTodo, setCurrentTodo] = useState('')
+
   function handleNewTodo(newTodo){ //going to pass this function in through props
     const newTodos = [...todos, newTodo];
     setTodos(newTodos);
@@ -21,10 +23,16 @@ function App() {
     setTodos(newTodos)
   }
 
+  function handleEditTodo(index) {
+    const valueToBeEdited = todos[index]
+    setCurrentTodo(valueToBeEdited)
+    handleDeleteTodo(index)
+  }
+
   return (
     <>
-    <TodoInput handleNewTodo={handleNewTodo}/>
-    <TodoList todos={todos} handleDeleteTodo={handleDeleteTodo}/>
+    <TodoInput handleNewTodo={handleNewTodo} currentTodo={currentTodo} setCurrentTodo={setCurrentTodo} />
+    <TodoList todos={todos} handleDeleteTodo={handleDeleteTodo} handleEditTodo={handleEditTodo}/>
     </>
   )
 }
